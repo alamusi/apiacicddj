@@ -42,3 +42,12 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
   });
 
 });
+
+const js = fs.readFileSync('./node_modules/swagger-client/browser/index.js');
+const html = fs.readFileSync('./swagger-client.html');
+app.use('/swagger-client.js', function(req, res, next) {
+  res.end(js);
+});
+app.use('/swagger-client.html', function(req, res, next) {
+  res.end(html);
+});
