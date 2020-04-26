@@ -15,6 +15,7 @@ tags:
   description: "Everything about your Pets"
 schemes:
 - "http"
+- "https"
 consumes:
 - "application/json"
 produces:
@@ -38,9 +39,7 @@ paths:
         "200":
           description: "successful operation"
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Pet"
+            $ref: "#/definitions/Pet"
         "405":
           description: "Invalid input"
       x-swagger-router-controller: "Pet"
@@ -61,9 +60,7 @@ paths:
         "200":
           description: "successful operation"
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Pet"
+            $ref: "#/definitions/Pet"
         "400":
           description: "Invalid ID supplied"
         "404":
@@ -110,9 +107,6 @@ paths:
       description: "Muliple tags can be provided with comma separated strings. Use\
         \         tag1, tag2, tag3 for testing."
       operationId: "findPetsByTags"
-      produces:
-      - "application/xml"
-      - "application/json"
       parameters:
       - name: "tags"
         in: "query"
@@ -163,9 +157,6 @@ paths:
       summary: "Deletes a pet"
       description: ""
       operationId: "deletePet"
-      produces:
-      - "application/xml"
-      - "application/json"
       parameters:
       - name: "petId"
         in: "path"
@@ -177,9 +168,7 @@ paths:
         "200":
           description: "successful operation"
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Pet"
+            $ref: "#/definitions/Pet"
         "400":
           description: "Invalid ID supplied"
         "404":
@@ -200,9 +189,6 @@ definitions:
         example: "doggie"
       photoUrls:
         type: "array"
-        xml:
-          name: "photoUrl"
-          wrapped: true
         items:
           type: "string"
       status:
