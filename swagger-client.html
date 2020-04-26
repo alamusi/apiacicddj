@@ -21,6 +21,21 @@
       console.error("failed to load the spec" + reason);
     });
   }
+
+  function findByStatus() {
+    swaggerClient.then(function (c) {
+      c.apis.pet.findPetsByStatus({
+        status: document.getElementById('petStatus').value
+      }).then(function (r) {
+        console.log(r);
+        document.getElementById('result').value = JSON.stringify(r.body, null, 2)
+      }).catch(function (e) {
+        console.error("failed on API call " + e);
+      });
+    }).catch(function (reason) {
+      console.error("failed to load the spec" + reason);
+    });
+  }
 </script>
 </head>
 <body>
@@ -34,7 +49,8 @@
     <option value="sold">sold</option>
   </select>
   <br>
-  <input type="button" value="add" onclick="javascript:addPet()">
+  <input type="button" value="addPet" onclick="javascript:addPet()"> | 
+  <input type="button" value="findByStatus" onclick="javascript:findByStatus()">
   <hr>
   <label>Result</label>
   <textarea id="result" rows="10" cols="15" disabled="true"></textarea>
