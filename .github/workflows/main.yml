@@ -6,24 +6,21 @@ name: EB deploy
 # events but only for the master branch
 on:
   push:
-    branches: [ actions ]
+    branches: 
+    - actions
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
   build:
+    name: nodejs build
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    
-    strategy:
-      matrix:
-        node-version: [12.x]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-
     - name: Generate deployment package
       run: zip ${{ GITHUB_REF }}.zip -r ./ -x "*node_modules*" -x "*.git*"
       
