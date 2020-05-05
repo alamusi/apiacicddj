@@ -4,7 +4,7 @@
   "description": "This is a minimum Petstore example for skillsoft API courses. It trimmed down from Swagger Petstore Example",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive",
+    "test": "mocha --recursive --timeout 10000",
     "start": "DEBUG=* node index.js"
   },
   "keywords": [

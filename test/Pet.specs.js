@@ -3,18 +3,36 @@
 /* eslint-env mocha */
 const URL = require('url').URL
 const address = new URL('http://localhost')
-address.port = 8080
+address.port = process.env.PORT || 8080
 address.pathname = '/api-docs'
 
-const swagger = require('swagger-client')(address.toString())
+const SwaggerClient = require('swagger-client')
+let swagger
 const should = require('should')
-const assert = require('assert')
 const pet = {
   "photoUrls": ["url5", "url6"],
   "name": "delta",
   "status": "sold"
 }
 let id = 3
+
+const server = require('../index')
+function wait(done) {
+  if (server.listening) {
+    console.log('server is now listening at', address.port)
+    swagger = SwaggerClient(address.toString())
+    done()
+  } else {
+    console.log('server is not yet started')
+    setTimeout(()=> {
+      wait(done)
+    }, 500)
+  }
+}
+
+before(done => {
+  wait(done)
+})
 
 describe('pet', () => {
   describe('addPet', () => {
@@ -102,3 +120,7 @@ describe('pet', () => {
     })
   })
 })
+
+after(done => {
+  server.close(done)
+});
