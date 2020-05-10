@@ -1,0 +1,59 @@
+<html>
+<head>
+<script src='/swagger-client.js' type='text/javascript'></script> 
+<script>
+  var swaggerClient = new SwaggerClient('/api-docs');
+  function addPet() {
+    swaggerClient.then(function (c) {
+      c.apis.pet.addPet({
+        body: {
+          name: document.getElementById('petName').value,
+          status: document.getElementById('petStatus').value,
+          photoUrls: ['url7', 'url8']
+        }
+      }).then(function (r) {
+        console.log(r);
+        document.getElementById('result').value = JSON.stringify(r.body, null, 2)
+      }).catch(function (e) {
+        console.error("failed on API call " + e);
+      });
+    }).catch(function (reason) {
+      console.error("failed to load the spec" + reason);
+    });
+  }
+
+  function findByStatus() {
+    swaggerClient.then(function (c) {
+      c.apis.pet.findPetsByStatus({
+        status: document.getElementById('petStatus').value
+      }).then(function (r) {
+        console.log(r);
+        document.getElementById('result').value = JSON.stringify(r.body, null, 2)
+      }).catch(function (e) {
+        console.error("failed on API call " + e);
+      });
+    }).catch(function (reason) {
+      console.error("failed to load the spec" + reason);
+    });
+  }
+</script>
+</head>
+<body>
+  <label>Name</label>
+  <input type="text" id="petName" size="15" placeholder="doggie">
+  <br>
+  <label>Status</label>
+  <select id="petStatus">
+    <option value="available">available</option>
+    <option value="pending">pending</option>
+    <option value="sold">sold</option>
+  </select>
+  <br>
+  <input type="button" value="addPet" onclick="javascript:addPet()"> | 
+  <input type="button" value="findByStatus" onclick="javascript:findByStatus()">
+  <hr>
+  <label>Result</label>
+  <textarea id="result" rows="10" cols="15" disabled="true"></textarea>
+  <br>
+</body>
+</html>
