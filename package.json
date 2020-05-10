@@ -4,6 +4,7 @@
   "description": "This is a minimum Petstore example for skillsoft API courses. It trimmed down from Swagger Petstore Example",
   "main": "index.js",
   "scripts": {
+    "test": "mocha --recursive --timeout 10000",
     "start": "DEBUG=* node index.js"
   },
   "keywords": [
@@ -15,6 +16,9 @@
     "connect": "^3.2.0",
     "debug": "^4.1.1",
     "js-yaml": "^3.3.0",
-    "swagger-tools": "0.10.1"
+    "mocha": "^7.1.1",
+    "should": "^13.2.3",
+    "swagger-client": "^3.10.1",
+    "swagger-tools": "^0.10.4"
   }
 }

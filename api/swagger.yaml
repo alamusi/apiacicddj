@@ -3,12 +3,11 @@ swagger: "2.0"
 info:
   description: "This is a minimum Petstore example for skillsoft API courses. It trimmed\
     \ down from Swagger Petstore Example"
-  version: "0.1.0"
+  version: "0.2.0"
   title: "Mini Petstore"
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "localhost:8080"
 basePath: "/v1"
 tags:
 - name: "pet"
@@ -98,34 +97,6 @@ paths:
               $ref: "#/definitions/Pet"
         "400":
           description: "Invalid status value"
-      x-swagger-router-controller: "Pet"
-  /pet/findByTags:
-    get:
-      tags:
-      - "pet"
-      summary: "Finds Pets by tags"
-      description: "Muliple tags can be provided with comma separated strings. Use\
-        \         tag1, tag2, tag3 for testing."
-      operationId: "findPetsByTags"
-      parameters:
-      - name: "tags"
-        in: "query"
-        description: "Tags to filter by"
-        required: true
-        type: "array"
-        items:
-          type: "string"
-        collectionFormat: "multi"
-      responses:
-        "200":
-          description: "successful operation"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Pet"
-        "400":
-          description: "Invalid tag value"
-      deprecated: true
       x-swagger-router-controller: "Pet"
   /pet/{petId}:
     get:
