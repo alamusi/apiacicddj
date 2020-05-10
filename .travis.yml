@@ -1,0 +1,16 @@
+language: node_js
+node_js: 
+ - lts/*
+
+deploy:
+  provider: elasticbeanstalk
+  access_key_id: $AWSACCSSSKEYID
+  secret_access_key: $AWSSECRETACCESSKEY
+  region: us-east-1
+  app: apiacicddj
+  env: Apiacicddj-env
+  bucket_name: apiacicddj
+  on:
+    branch: travis
+  edge: true
+  cleanup: true
